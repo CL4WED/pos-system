@@ -2,7 +2,8 @@ FROM php:8.2-apache
 
 RUN apt-get update && apt-get install -y libicu-dev \
     && docker-php-ext-install intl \
-    && a2enmod rewrite
+    && a2dismod mpm_event mpm_worker \
+&& a2enmod mpm_prefork rewrite
 
 WORKDIR /var/www/html
 COPY . /var/www/html
