@@ -1,19 +1,14 @@
-FROM php:8.2-apache
+FROM php:8.2-cli
 
 RUN apt-get update && apt-get install -y libicu-dev \
     && docker-php-ext-install intl \
-    && a2dismod mpm_event mpm_worker \
-&& a2enmod mpm_prefork rewrite
+    && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /var/www/html
-COPY . /var/www/html
+WORKDIR /app
+COPY . /app
 
-RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' \
-    /etc/apache2/sites-available/*.conf \
-    /etc/apache2/apache2.conf
+RUN chmod -R 775 writable
 
-ENV APACHE_DOCUMENT_ROOT /var/www/html/public
+EXPOSE 8080
 
-RUN chown -R www-data:www-data /var/www/html/writable
-
-EXPOSE 80
+CMD ["sh", "-c", "php spark serve --host 0.0.0.0 --port ${PORT:-8080}"]
