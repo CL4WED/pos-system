@@ -5,6 +5,7 @@ RUN apt-get update && apt-get install -y libicu-dev \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
+
 COPY . /app
 
 RUN chmod -R 775 writable
