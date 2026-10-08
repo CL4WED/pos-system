@@ -1,8 +1,19 @@
-<h1>About the POS System</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>About</title>
+</head>
+<body>
+    <h1>About the Developer</h1>
 
-<a href="/">Home</a> |
-<a href="/about">About</a> |
-<a href="/customers">Customer Accounts</a> |
-<a href="/users">User Accounts</a>
+    <nav>
+        <a href="/">Today</a> |
+        <a href="/tasks">All Tasks</a> |
+        <a href="/profile">Profile</a> |
+        <a href="/about">About</a>
+    </nav>
 
-<p>This website was created using CodeIgniter 4 and the MVC pattern.</p>
+    <p>This Tasks for Today Management System was developed by Claude Andre Ebnol.</p>
+    <p>The system was created using CodeIgniter 4, PHP, and MySQL.</p>
+</body>
+</html>

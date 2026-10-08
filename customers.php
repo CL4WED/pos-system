@@ -1,22 +1,17 @@
-<h1>Customer Accounts</h1>
+<?php
 
-<a href="/">Home</a> |
-<a href="/about">About</a> |
-<a href="/customers">Customer Accounts</a> |
-<a href="/users">User Accounts</a>
+namespace App\Controllers;
 
-<table border="1" cellpadding="8">
-    <tr>
-        <th>Full Name</th>
-        <th>Email</th>
-        <th>Phone</th>
-    </tr>
+use App\Models\CustomerModel;
 
-    <?php foreach ($customers as $customer): ?>
-        <tr>
-            <td><?= esc($customer['full_name']) ?></td>
-            <td><?= esc($customer['email']) ?></td>
-            <td><?= esc($customer['phone']) ?></td>
-        </tr>
-    <?php endforeach; ?>
-</table>
+class Customers extends BaseController
+{
+    public function index()
+    {
+        $customerModel = new CustomerModel();
+
+        $data['customers'] = $customerModel->findAll();
+
+        return view('customers', $data);
+    }
+}

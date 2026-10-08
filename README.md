@@ -67,3 +67,19 @@ Additionally, make sure that the following extensions are enabled in your PHP:
 - json (enabled by default - don't turn it off)
 - [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
 - [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+
+Tasks for Today Management System
+
+This CodeIgniter 4 application displays daily tasks, all tasks, a demo user profile, and developer information.
+
+Pages:
+- / — today's tasks
+- /tasks — all tasks
+- /profile — demo user
+- /about — developer information
+
+Setup:
+1. Create a MySQL database named pos_db.
+2. Import pos_db.sql.
+3. Configure the .env database settings.
+4. Run php spark serve.

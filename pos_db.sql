@@ -1,109 +1,34 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Generation Time: Sep 23, 2026 at 04:06 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+USE pos_db;
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
+DROP TABLE IF EXISTS customers;
+DROP TABLE IF EXISTS tasks;
+DROP TABLE IF EXISTS users;
 
+CREATE TABLE tasks (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(150) NOT NULL,
+    status VARCHAR(20) NOT NULL DEFAULT 'pending',
+    task_date DATE NOT NULL,
+    created_at DATETIME NOT NULL
+);
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    full_name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    created_at DATETIME NOT NULL
+);
 
---
--- Database: `pos_db`
---
+INSERT INTO tasks (title, status, task_date, created_at) VALUES
+('Complete database activity', 'pending', CURDATE(), NOW()),
+('Review CodeIgniter models', 'completed', CURDATE(), NOW()),
+('Prepare project screenshots', 'pending', CURDATE(), NOW()),
+('Submit GitHub repository', 'pending', DATE_SUB(CURDATE(), INTERVAL 1 DAY), NOW()),
+('Check hosted application', 'completed', DATE_SUB(CURDATE(), INTERVAL 1 DAY), NOW()),
+('Write README file', 'pending', DATE_SUB(CURDATE(), INTERVAL 2 DAY), NOW()),
+('Test application routes', 'completed', DATE_SUB(CURDATE(), INTERVAL 2 DAY), NOW()),
+('Finalize assessment submission', 'pending', DATE_ADD(CURDATE(), INTERVAL 1 DAY), NOW());
 
--- --------------------------------------------------------
-
---
--- Table structure for table `customers`
---
-
-CREATE TABLE `customers` (
-  `id` int(11) NOT NULL,
-  `full_name` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `phone` varchar(20) DEFAULT NULL,
-  `created_at` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `customers`
---
-
-INSERT INTO `customers` (`id`, `full_name`, `email`, `phone`, `created_at`) VALUES
-(1, 'Juan Dela Cruz', 'juan@email.com', '09171234567', '2026-09-23 21:58:43'),
-(2, 'Maria Santos', 'maria@email.com', '09181234567', '2026-09-23 21:58:43'),
-(3, 'Carlo Reyes', 'carlo@email.com', '09191234567', '2026-09-23 21:58:43'),
-(4, 'Ana Garcia', 'ana@email.com', '09201234567', '2026-09-23 21:58:43'),
-(5, 'Mark Flores', 'mark@email.com', '09211234567', '2026-09-23 21:58:43');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `users`
---
-
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
-  `username` varchar(50) NOT NULL,
-  `full_name` varchar(100) NOT NULL,
-  `created_at` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `username`, `full_name`, `created_at`) VALUES
-(1, 'admin', 'Admin User', '2026-09-23 21:58:43'),
-(2, 'jdelacruz', 'Juan Dela Cruz', '2026-09-23 21:58:43'),
-(3, 'msantos', 'Maria Santos', '2026-09-23 21:58:43'),
-(4, 'creyes', 'Carlo Reyes', '2026-09-23 21:58:43'),
-(5, 'agarcia', 'Ana Garcia', '2026-09-23 21:58:43');
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `customers`
---
-ALTER TABLE `customers`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `username` (`username`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `customers`
---
-ALTER TABLE `customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+INSERT INTO users (username, full_name, email, created_at)
+VALUES ('admin', 'Claude Andre Ebnol', 'claude.ebnol@gmail.com', NOW());
